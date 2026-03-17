@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Dashboard · FlightMS</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+    <link href="/css/styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="nav"></div>
+
+    <main class="container my-4">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="card card-soft">
+            <div class="card-body p-4">
+              <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                <div>
+                  <h3 class="mb-1"><i class="bi bi-gear text-primary me-1"></i> Admin Dashboard</h3>
+                  <div class="text-secondary" id="adminSubtitle">Loading…</div>
+                </div>
+                <div class="d-flex gap-2">
+                  <button class="btn btn-primary" id="addFlightBtn">
+                    <i class="bi bi-plus-circle me-1"></i> Add Flight
+                  </button>
+                  <button class="btn btn-outline-primary" id="refreshBtn">
+                    <i class="bi bi-arrow-clockwise me-1"></i> Refresh
+                  </button>
+                </div>
+              </div>
+
+              <div id="alertHost" class="mt-3"></div>
+
+              <h5 class="mt-4 mb-2">Flights</h5>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Flight</th>
+                      <th>Route</th>
+                      <th>Times</th>
+                      <th class="text-end">Price</th>
+                      <th class="text-end">Seats</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody id="flightsBody">
+                    <tr><td colspan="7" class="text-secondary">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+
+              <h5 class="mt-4 mb-2">User Bookings</h5>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead>
+                    <tr>
+                      <th>Booking</th>
+                      <th>User</th>
+                      <th>Flight</th>
+                      <th>Route</th>
+                      <th class="text-end">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody id="bookingsBody">
+                    <tr><td colspan="5" class="text-secondary">Loading…</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Add/Edit Flight Modal -->
+    <div class="modal fade" id="flightModal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="flightModalTitle">Flight</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div id="modalAlertHost"></div>
+            <form id="flightForm" class="row g-3" novalidate>
+              <input type="hidden" name="id" />
+              <div class="col-md-6">
+                <label class="form-label">Airline Name</label>
+                <input class="form-control" name="airlineName" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Flight Number</label>
+                <input class="form-control" name="flightNumber" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Departure City</label>
+                <input class="form-control" name="fromCity" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Destination City</label>
+                <input class="form-control" name="toCity" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Departure Time</label>
+                <input class="form-control" name="departureTime" placeholder="09:15" required />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">Arrival Time</label>
+                <input class="form-control" name="arrivalTime" placeholder="11:00" required />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Ticket Price</label>
+                <input class="form-control" name="ticketPrice" type="number" min="0" step="0.01" required />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Total Seats</label>
+                <input class="form-control" name="totalSeats" type="number" min="1" step="1" required />
+              </div>
+              <div class="col-md-4">
+                <label class="form-label">Available Seats</label>
+                <input class="form-control" name="availableSeats" type="number" min="0" step="1" required />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-outline-secondary" type="button" data-bs-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary" type="button" id="saveFlightBtn">
+              <i class="bi bi-save me-1"></i> Save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="/partials/nav.js"></script>
+    <script type="module" src="/js/admin.js"></script>
+  </body>
+</html>
+
